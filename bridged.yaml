@@ -1,0 +1,14 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enp2s0: {}
+    enp1s0: {}
+  bridges:
+    br0:
+      addresses:
+      - "10.120.100.1/24"
+      - "18.18.18.18/24"
+      interfaces:
+      - enp2s0
+      - enp1s0

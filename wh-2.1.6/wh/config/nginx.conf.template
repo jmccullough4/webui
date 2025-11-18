@@ -1,0 +1,102 @@
+server {
+    listen 80 default_server;
+
+    # Return nothing and close the connection
+    return 444;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_1}:80;
+    server_name ${MANAGEMENT_INTERFACE_1};
+    return 301 https://${MANAGEMENT_INTERFACE_1}$request_uri;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_1}:443 ssl;
+    server_name ${MANAGEMENT_INTERFACE_1};
+
+    # SSL Configuration (if certificates exist)
+    ssl_certificate /etc/warhammer/ssl/warhammer.crt;
+    ssl_certificate_key /etc/warhammer/ssl/warhammer.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    location /management {
+        alias /apps/webui/wh-${WARHAMMER_VERSION}/wh/frontend_build/;
+        try_files $uri $uri/ /management/index.html;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    client_max_body_size 100m;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_2}:80;
+    server_name ${MANAGEMENT_INTERFACE_2};
+    return 301 https://${MANAGEMENT_INTERFACE_2}$request_uri;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_2}:443 ssl;
+    server_name ${MANAGEMENT_INTERFACE_2};
+
+    # SSL Configuration (if certificates exist)
+    ssl_certificate /etc/warhammer/ssl/warhammer.crt;
+    ssl_certificate_key /etc/warhammer/ssl/warhammer.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    location /management {
+        alias /apps/webui/wh-${WARHAMMER_VERSION}/wh/frontend_build/;
+        try_files $uri $uri/ /management/index.html;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    client_max_body_size 100m;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_3}:80;
+    server_name ${MANAGEMENT_INTERFACE_3};
+    return 301 https://${MANAGEMENT_INTERFACE_3}$request_uri;
+}
+
+server {
+    listen ${MANAGEMENT_INTERFACE_3}:443 ssl;
+    server_name ${MANAGEMENT_INTERFACE_3};
+
+    # SSL Configuration (if certificates exist)
+    ssl_certificate /etc/warhammer/ssl/warhammer.crt;
+    ssl_certificate_key /etc/warhammer/ssl/warhammer.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    location /management {
+        alias /apps/webui/wh-${WARHAMMER_VERSION}/wh/frontend_build/;
+        try_files $uri $uri/ /management/index.html;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    client_max_body_size 100m;
+}

@@ -1,0 +1,14 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    ${PORT_1_INTERFACE}:
+      dhcp4: True
+    ${PORT_2_INTERFACE}: {}
+  bridges:
+    ${BRIDGE_INTERFACE}:
+      addresses:
+      - "${BRIDGED_CIDR}"
+      - "18.18.18.18/24"
+      interfaces:
+      - ${PORT_2_INTERFACE}

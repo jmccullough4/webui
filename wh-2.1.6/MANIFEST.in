@@ -1,0 +1,34 @@
+# Exclude company license generator tools from build
+# Note: Issuer scripts moved to separate secure repository
+
+# Exclude test files
+exclude *.pyc
+exclude __pycache__
+exclude *.pyo
+exclude *.pyd
+exclude .Python
+exclude env.sh
+
+# Exclude development and configuration files
+exclude *.log
+exclude .DS_Store
+exclude *.local
+exclude untracked/
+
+# Include necessary files
+include wh/requirements.txt
+include wh/version.py
+include wh/app.py
+include wh/scripts/device_registration.py
+include wh/license_manager.py
+include wh/utils/*
+include wh/routes/*
+include wh/config/*
+include wh/frontend_build/*
+include wh/issuer_keys/*
+include run_app.py
+recursive-include wh/config *
+recursive-include wh/frontend_build *
+recursive-include wh/utils *
+recursive-include wh/routes *
+recursive-include wh/issuer_keys *
